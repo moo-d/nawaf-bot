@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 const crypto = require('crypto')
 const moment = require('moment-timezone')
-moment.tz.setDefault('Saudi_Arabia/Qassim').locale('sa')
+moment.tz.setDefault('Saudi_Arabia/Qassim').locale('sau')
 
 /**
  * Get text with color.
