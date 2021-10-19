@@ -90,7 +90,9 @@ const start = (Nawaf = new Client()) => {
         const pic = await Nawaf.getProfilePicFromServer(event.who)
         if (pic === `ERROR: 401`) {
           var picxs = 'https://i.ibb.co/Tq7d7TZ/age-hananta-495-photo.png'
-        } else {
+        } else if (pic === `ERROR: 404`) {
+	  var picx = `https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg`
+	} else {
           picxs = pic
         }
         const bye = await new canvas.Goodbye()
