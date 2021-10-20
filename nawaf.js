@@ -107,7 +107,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         const isOwner = sender.id === ownerNumber
         const isBanned = _ban.includes(sender.id)
         const isPremium = premium.checkPremiumUser(sender.id, _premium)
-        const isRegistered = register.checkRegisteredUser(sender.id, _registered)
         const isGroupAdmins = isGroupMsg ? groupAdmins.includes(sender.id) : false
         const isBotGroupAdmins = isGroupMsg ? groupAdmins.includes(botNumber) : false
         const isNsfw = isGroupMsg ? _nsfw.includes(groupId) : false
@@ -339,3 +338,163 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (isCmd && !isPremium && !isOwner) msgFilter.addFilter(from)
 
         switch (command) {
+            case prefix+'level':
+                if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
+                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
+                const userLevel = level.getLevelingLevel(sender.id, _level)
+                const userXp = level.getLevelingXp(sender.id, _level)
+                const ppLink = await bocchi.getProfilePicFromServer(sender.id)
+                if (ppLink === undefined) {
+                    var pepe = errorImg
+                } else {
+                    pepe = ppLink
+                }
+                const requiredXp = 5 * Math.pow(userLevel, 2) + 50 * userLevel + 100
+                const rank = new canvas.Rank()
+                    .setAvatar(pepe)
+                    .setLevel(userLevel)
+                    .setLevelColor('#ffa200', '#ffa200')
+                    .setRank(Number(level.getUserRank(sender.id, _level)))
+                    .setCurrentXP(userXp)
+                    .setOverlay('#000000', 100, false)
+                    .setRequiredXP(requiredXp)
+                    .setProgressBar('#ffa200', 'COLOR')
+                    .setBackground('COLOR', '#000000')
+                    .setUsername(pushname)
+                    .setDiscriminator(sender.id.substring(6, 10))
+                rank.build()
+                    .then(async (buffer) => {
+                        const imageBase64 = `data:image/png;base64,${buffer.toString('base64')}`
+                        await bocchi.sendImage(from, imageBase64, 'rank.png', '', id)
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'leaderboard':
+                if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
+                if (!isGroupMsg) return await bocchi.reply(from. ind.groupOnly(), id)
+                const resp = _level
+                _level.sort((a, b) => (a.xp < b.xp) ? 1 : -1)
+                let leaderboard = '*── 「 LEADERBOARDS 」 ──*\n\n'
+                try {
+                    for (let i = 0; i < 10; i++) {
+                        var roles = 'Copper V'
+                        if (resp[i].level >= 5) {
+                            roles = 'Copper IV'
+                        } 
+                         if (resp[i].level >= 10) {
+                            roles = 'Copper III'
+                        } 
+                         if (resp[i].level >= 15) {
+                            roles = 'Copper II'
+                        } 
+                         if (resp[i].level >= 20) {
+                            roles = 'Copper I'
+                        } 
+                         if (resp[i].level >= 25) {
+                            roles = 'Silver V'
+                        } 
+                         if (resp[i].level >= 30) {
+                            roles = 'Silver IV'
+                        } 
+                         if (resp[i].level >= 35) {
+                            roles = 'Silver III'
+                        } 
+                         if (resp[i].level >= 40) {
+                            roles = 'Silver II'
+                        } 
+                         if (resp[i].level >= 45) {
+                            roles = 'Silver I'
+                        } 
+                         if (resp[i].level >= 50) {
+                            roles = 'Gold V'
+                        } 
+                         if (resp[i].level >= 55) {
+                            roles = 'Gold IV'
+                        } 
+                         if (resp[i].level >= 60) {
+                            roles = 'Gold III'
+                        } 
+                         if (resp[i].level >= 65) {
+                            roles = 'Gold II'
+                        } 
+                         if (resp[i].level >= 70) {
+                            roles = 'Gold I'
+                        } 
+                         if (resp[i].level >= 75) {
+                            roles = 'Platinum V'
+                        } 
+                         if (resp[i].level >= 80) {
+                            roles = 'Platinum IV'
+                        } 
+                         if (resp[i].level >= 85) {
+                            roles = 'Platinum III'
+                        } 
+                         if (resp[i].level >= 90) {
+                            roles = 'Platinum II'
+                        } 
+                         if (resp[i].level >= 95) {
+                            roles = 'Platinum I'
+                        } 
+                         if (resp[i].level > 100) {
+                            roles = 'Exterminator'
+                        }
+                        leaderboard += `${i + 1}. wa.me/${_level[i].id.replace('@c.us', '')}\n➸ *XP*: ${_level[i].xp} *Level*: ${_level[i].level}\n➸ *Role*: ${roles}\n\n`
+                    }
+                    await bocchi.reply(from, leaderboard, id)
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, ind.minimalDb(), id)
+                }
+            break
+
+            // Downloader
+            case prefix+'joox': // By Hafizh
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                const dataJoox = await axios.get(`https://api.vhtear.com/music?query=${q}&apikey=${config.vhtear}`)
+                const cardJoox = new canvas.Spotify()
+                    .setAuthor(dataJoox.data.result[0].penyanyi)
+                    .setAlbum(dataJoox.data.result[0].album)
+                    .setStartTimestamp(dataJoox.data.result[0].duration)
+                    .setEndTimestamp(10)
+                    .setImage(dataJoox.data.result[0].linkImg)
+                    .setTitle(dataJoox.data.result[0].judul)
+                cardJoox.build()
+                    .then(async (buffer) => {
+                        canvas.write(buffer, `${sender.id}_joox.png`)
+                        await bocchi.sendFile(from, `${sender.id}_joox.png`, 'joox.png', ind.joox(dataJoox.data), id)
+                        fs.unlinkSync(`${sender.id}_joox.png`)
+                        await bocchi.sendFileFromUrl(from, dataJoox.data.result[0].linkMp3, 'joox.mp3', '', id)
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'igdl': // by: VideFrelan
+            case prefix+'instadl':
+                if (!isUrl(url) && !url.includes('instagram.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.insta(url)
+                    .then(async ({ result }) => {
+                        for (let i = 0; i < result.post.length; i++) {
+                            if (result.post[i].type === 'image') {
+                                await bocchi.sendFileFromUrl(from, result.post[i].urlDownload, 'igpostdl.jpg', `*...:* *Instagram Downloader* *:...*\n\nUsername: ${result.owner_username}\nCaption: ${result.caption}`, id)
+                            } else if (result.post[i].type === 'video') {
+                                await bocchi.sendFileFromUrl(from, result.post[i].urlDownload, 'igpostdl.mp4', `*...:* *Instagram Downloader* *:...*\n\nUsername: ${result.owner_username}\nCaption: ${result.caption}`, id)
+                            }
+                        }
+                        console.log('Success sending Instagram media!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break 
