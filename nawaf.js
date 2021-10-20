@@ -39,8 +39,8 @@ const cron = require('node-cron')
 const { msgFilter, color, processTime, isUrl, createSerial } = require('../tools')
 const { nsfw, weeaboo, downloader, fun, misc, toxic } = require('../lib')
 const { uploadImages } = require('../tools/fetcher')
-const { ind, eng } = require('./text/lang/')
-const { daily, level, register, afk, reminder, premium, limit} = require('../function')
+const { ind } = require('./text/lang')
+const { daily, level, afk, reminder, premium, limit} = require('../function')
 const cd = 4.32e+7
 const limitCount = 25
 const errorImg = 'https://i.ibb.co/jRCpLfn/user.png'
@@ -62,7 +62,6 @@ const _autosticker = JSON.parse(fs.readFileSync('./database/group/autosticker.js
 const _ban = JSON.parse(fs.readFileSync('./database/bot/banned.json'))
 const _premium = JSON.parse(fs.readFileSync('./database/bot/premium.json'))
 const _mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
-const _registered = JSON.parse(fs.readFileSync('./database/bot/registered.json'))
 const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 let _limit = JSON.parse(fs.readFileSync('./database/user/limit.json'))
 const _afk = JSON.parse(fs.readFileSync('./database/user/afk.json'))
@@ -208,7 +207,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             if (levelRole >= 100) {
                 role = 'Exterminator'
             }
-        if (isGroupMsg && isRegistered && !level.isGained(sender.id) && !isBanned && isLevelingOn) {
+        if (isGroupMsg && !level.isGained(sender.id) && !isBanned && isLevelingOn) {
             try {
                 level.addCooldown(sender.id)
                 const currentLevel = level.getLevelingLevel(sender.id, _level)
@@ -338,3 +337,5 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         
         // Anti spam
         if (isCmd && !isPremium && !isOwner) msgFilter.addFilter(from)
+
+        switch (command) {
