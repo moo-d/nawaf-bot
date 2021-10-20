@@ -2,7 +2,7 @@
 const { prefix } = require('../../../config.json')
 
 exports.wait = () => {
-    return `Please wait a moment~`
+    return `رجاء انتظر لحظة~`
 }
 
 exports.ok = () => {
@@ -10,92 +10,92 @@ exports.ok = () => {
 }
 
 exports.wrongFormat = () => {
-    return `Incorrect format! Please check the usage in *${prefix}menu*.`
+    return `!لم اجد الامر الي تبحث عنه شوف الاوامر وتاكد زين *${prefix}menu*.`
 }
 
 exports.emptyMess = () => {
-    return `Please enter the message!`
+    return `رجاء ادخل الرسالة!`
 }
 
 exports.cmdNotFound = (cmd) => {
-    return `Command *${prefix}${cmd}* not found!`
+    return `الامر *${prefix}${cmd}* لم اجده!`
 }
 
 exports.blocked = (ownerNumber) => {
-    return `Bot not receiving calls. You have been blocked because breaking the rules!\n\nContact the owner: wa.me/${ownerNumber.replace('@c.us', '')}`
+    return `ممنوع تتصل على البوت!وببلك كلم المطور ولاتعيدها ك سويتي؟!\n\nContact the owner: wa.me/${ownerNumber.replace('@c.us', '')}`
 }
 
 exports.ownerOnly = () => {
-    return `This command only Owner-sama can use!`
+    return `هذا الامر فقط المطور يستطيع استخدامه!`
 }
 
 exports.doneOwner = () => {
-    return `Done, Owner-sama~`
+    return ` المطور ساما`
 }
 
 exports.groupOnly = () => {
-    return `This command can only be used in group!`
+    return `هذا الامر يستخدم فقط في القروب!`
 }
 
 exports.adminOnly = () => {
-    return `This command can only be used by group admins!`
+    return `هذا الامر يستخدم في قروب المشرفين فقط!`
 }
 
 exports.notNsfw = () => {
-    return `NSFW command hasn't been enabled!`
+    return `هذا الامر لم يتم تمكينه!`
 }
 
 exports.nsfwOn = () => {
-    return `NSFW command was successfully *enabled*!`
+    return `هذاالامر *تم تشغيله*!`
 }
 
 exports.nsfwOff = () => {
-    return `NSFW command was successfully *disabled*!`
+    return `هذا الامر تم *ايقافه*!`
 }
 
 exports.nsfwAlready = () => {
-    return `NSFW command was successfully enabled before.`
+    return `هذا الامر تم تشغيله مسبقا.`
 }
 
 exports.addedGroup = (chat) => {
-    return `Thank you for inviting me, members of *${chat.contact.name}*!\n\nPlease register by typing:\n*${prefix}register* name | age`
+    return `شكرا لاضافتي يامشرف *${chat.contact.name}*!\n\nPlease register by typing:\n*${prefix}register* name | age`
 }
 
 exports.nhFalse = () => {
-    return `Invalid code!`
+    return `كود خاطئ !`
 }
 
 exports.listBlock = (blockNumber) => {
     return `
-*── 「 HALL OF SHAME 」 ──*
+*── 「 عار عليك 」 ──*
 
 Total blocked: *${blockNumber.length}* user(s)\n
     `
 }
 
 exports.notPremium = () => {
-    return `Sorry! This command can only be used by premium users.`
+    return `اسف هذا الامر يستخدمه فقط فئة البرايم.`
 }
 
 exports.notAdmin = () => {
-    return `The user is not an admin!`
+    return `المستخدم غير مشرف!`
 }
 
 exports.adminAlready = () => {
-    return `Cannot promote a user who is an admin already!`
+    return `لايمكنني اعطائه اشراف وهو مشرف!`
 }
 
 exports.botNotPremium = () => {
-    return `This bot does not support premium commands. Please contact the owner of this bot.`
+    return `هذا البوت لايدعم فئة البرايم رجاء تواصل مع المطور.`
 }
 
 exports.botNotAdmin = () => {
-    return `Make the bot as admin first!`
+    return `خلني مشرف اول!`
 }
 
 exports.ytFound = (res) => {
     return `
-*── 「 YOUTUBE 」 ──*
+*── 「 يوتيوب  」 ──*
 
 Video has been found!
 ➸ *Title*: ${res.title}
@@ -103,17 +103,17 @@ Video has been found!
 ${res.desc}
 ➸ *Duration*: ${res.duration}
     
-Media is being send, please wait...
+المقطع قاعد ينرسل انتظر من فضلك...
     `
 }
 
 exports.notRegistered = () => {
-    return `You haven't registered in our database!\n\nPlease register by typing:\n*${prefix}register* name | age`
+    return `انت غير معرف في قاعدة بيناتنا!\n\n اضف نفسك اليها بكتابة:\n*${prefix}register* الاسم | العمر`
 }
 
 exports.registered = (name, age, userId, time, serial) => {
     return `
-*── 「 REGISTRATION 」 ──*
+*── 「 تمت اضافة بيناتك 」 ──*
     
 Your account has been created with data below:
 ➸ *Name*: ${name}
@@ -610,7 +610,7 @@ This bot has anti-spam in the form of a cooldown command for *5 seconds* every t
 
 exports.menuDownloader = () => {
     return `
-*── 「 DOWNLOADER 」 ──*
+*── 「 التحميل 」 ──*
 
 1. *${prefix}facebook*
 Download Facebook video.
@@ -618,12 +618,12 @@ Aliases: *fb*
 Usage: *${prefix}facebook* video_link
 
 2. *${prefix}ytmp3*
-Download YouTube audio.
+يحمل صوت من اليوتيوب .
 Aliases: -
 Usage: *${prefix}ytmp3* link
 
 3. *${prefix}ytmp4*
-Download YouTube video.
+يحمل مقطع من اليوتيوب .
 Aliases: -
 Usage: *${prefix}ytmp4* link
 
@@ -633,12 +633,12 @@ Aliases: -
 Usage: *${prefix}joox* song's_title
 
 5. *${prefix}tiktok*
-Downlaod TikTok video.
+يحمل مقطع من التيك.
 Aliases: -
 Usage: *${prefix}tiktok* link
 
 6. *${prefix}twitter*
-Download Twitter media.
+يحمل صور/مقاطع من تويتر .
 Aliases: *twt*
 Usage: *${prefix}twiter* link
 
@@ -648,7 +648,7 @@ Aliases: -
 Usage: *${prefix}tiktokpic* username
 
 8. *${prefix}tiktoknowm*
-Download TikTok video with no WM.
+يحمل من التيك بدون حقوق.
 Aliases: *tktnowm*
 Usage: *${prefix}tiktoknowm* link
 
@@ -673,15 +673,15 @@ _Index of [1]_
 
 exports.menuBot = () => {
     return `
-*── 「 BOT 」 ──*
+*── 「 بوت 」 ──*
 
 1. *${prefix}rules*
-Must read.
+لازم تقراها.
 Aliases: *rule*
 Usage: *${prefix}rules*
 
 2. *${prefix}menu*
-Displays available commands.
+عرض قائمة الاوامر.
 Aliases: -
 Usage: *${prefix}menu* index_number
 
@@ -691,22 +691,22 @@ Aliases: *stats*
 Usage: *${prefix}status*
 
 4. *${prefix}listblock*
-Check blocked numbers.
+قائمة الارقام المحظوره.
 Aliases: -
 Usage: *${prefix}listblock*
 
 5. *${prefix}ping*
-Check the bot speed.
+سرعة النت.
 Aliases: *p*
 Usage: *${prefix}ping*
 
 6. *${prefix}delete*
-Delete messages from bots.
+حذف.
 Aliases: *del*
 Usage: Reply to deleted messages with a caption *${prefix}delete*.
 
 7. *${prefix}report*
-Report bugs to dev.
+تبليغ.
 Aliases: -
 Usage: *${prefix}report* text
 
@@ -716,32 +716,32 @@ Aliases: -
 Usage: *${prefix}tos*
 
 9. *${prefix}join*
-Join to group via link.
+اضافة لقروب.
 Aliases: -
 Usage: *${prefix}join* group's_link
 
 10. *${prefix}ownerbot*
-Send owner contact.
+المطور.
 Aliases: -
 Usage: *${prefix}ownerbot*
 
 11. *${prefix}getpic*
-Send user's profile pic.
+يرسل صورة شخص.
 Aliases: -
 Usage: *${prefix}getpic* @user/62812xxxxxxxx
 
 12. *${prefix}premiumcheck*
-Premium active time check.
+وقت الرايم.
 Aliases: *cekpremium*
 Usage: *${prefix}premiumcheck*
 
 13. *${prefix}premiumlist*
-Premium users list.
+قائمة البرايم.
 Aliases: *listpremium*
 Usage: *${prefix}premiumlist*
 
 14. *${prefix}limit*
-Check your remainings limit.
+تشوف نقاطك المحدوده.
 Aliases: -
 Usage: *${prefix}limit*
 
@@ -751,25 +751,25 @@ _Index of [2]_
 
 exports.menuMisc = () => {
     return `
-*── 「 MISC 」 ──*
+*── 「 الصوت 」 ──*
 
 1. *${prefix}say*
-The bot will repeat your message.
+البوت بيقول وش قلت انت.
 Aliases: -
 Usage: *${prefix}say* text
 
 2. *${prefix}lyric*
-Search for song lyrics.
+يبحث عن اغنية.
 Aliases: -
 Usage: *${prefix}lyric* song's_title
 
 3. *${prefix}shortlink*
-Create a shortlink.
+تخلي رابط صغير.
 Aliases: -
 Usage: *${prefix}shortlink* link
 
 4. *${prefix}wikien*
-Send Wikipedia from the given text.
+يبحث في ويكيبيديا .
 Aliases: -
 Usage: *${prefix}wikien* query
 
@@ -779,12 +779,12 @@ Aliases: -
 Usage: *${prefix}kbbi* text
 
 6. *${prefix}igstalk*
-Stalk Instagram account.
+مراقبة حساب انتسقرام.
 Aliases: -
 Usage: *${prefix}igstalk* ig_username
 
 7. *${prefix}gsmarena*
-Sending phone info from GSMArena.
+يرسل معلومات الرقم.
 Aliases: -
 Usage: *${prefix}gsmarena* phone's_model
 
@@ -794,7 +794,7 @@ Aliases: *resep*
 Usage: *${prefix}receipt* food's_name
 
 9. *${prefix}ytsearch*
-Sending YouTube search results.
+يبحث عن المقطع الي تبي.
 Aliases: *yts*
 Usage: *${prefix}ytsearch* query
 
@@ -814,12 +814,12 @@ Aliases: -
 Usage: *${prefix}distance* from | to
 
 13. *${prefix}findsticker*
-Search sticker.
+يبحث عن ستيكر.
 Aliases: *findstiker*
 Usage: *${prefix}findsticker* text
 
 14. *${prefix}math*
-A calculator.
+عملية حسابيه.
 * = multiplication
 + = addition
 - = subtraction
@@ -828,22 +828,22 @@ Aliases: -
 Usage: *${prefix}math* 12*12
 
 15. *${prefix}listsurah*
-Sending Al-Qur'an list.
+قائمة للقران.
 Aliases: -
 Usage: *${prefix}listsurah*
 
 16. *${prefix}surah*
-Sending surah.
+صورة من القران.
 Aliases: -
 Usage: *${prefix}surah* surah_number
 
 17. *${prefix}js*
-Get sholat schedule.
+وقت صلاة.
 Aliases: - 
 Usage: *${prefix}js* area
 
 18. *${prefix}mutual*
-Get random contact.
+مستخدم عشوائي .
 Aliases: -
 Usage: *${prefix}mutual*
 
@@ -853,7 +853,7 @@ Aliases: -
 Usage: *${prefix}whois* ip_address
 
 20. *${prefix}play*
-Play audio from YouTube.
+يشغل صوت من اليوتيوب .
 Aliases: - 
 Usage: *${prefix}play* title
 
@@ -868,7 +868,7 @@ Aliases: -
 Usage: *${prefix}toxic*
 
 23. *${prefix}tafsir*
-Al-Qur'an tafsir. (Indonesian)
+تفسير من القران. (Indonesian)
 Aliases: -
 Usage: *${prefix}tafsir* surah_name ayat
 
@@ -893,12 +893,12 @@ Aliases: -
 Usage: *${prefix}ongkir* service_name | from | to
 
 28. *${prefix}movie*
-Search for movies.
+يبحث عن فلم.
 Aliases: -
 Usage: *${prefix}movie* title
 
 28. *${prefix}reminder*
-Reminder. 
+تذكير. 
 *s* - seconds
 *m* - minutes
 *h* - hours
@@ -907,7 +907,7 @@ Aliases: -
 Usage: *${prefix}reminder* 10s | reminder_message
 
 29. *${prefix}imagetourl*
-Image uploader.
+يحمل صوره.
 Aliases: *imgtourl*
 Usage: Send images with caption *${prefix}imagetourl* or reply to the image with a caption *${prefix}imagetourl*.
 
@@ -917,7 +917,7 @@ Aliases: -
 Usage: *${prefix}infohoax*
 
 31. *${prefix}trending*
-Twitter trendings.
+ترند تويتر.
 Aliases: -
 Usage: *${prefix}trending*
 
@@ -927,7 +927,7 @@ Aliases: -
 Usage: *${prefix}jobseek*
 
 33. *${prefix}spamcall*
-Spam call.
+سبام اتصالات .
 Aliases: -
 Usage: *${prefix}spamcall* 812xxxxxxxx
 
@@ -947,12 +947,12 @@ Aliases: -
 Usage: *${prefix}quotes*
 
 37. *${prefix}genshininfo*
-Genshin Impact characters info.
+معلومات عن شخصيات قينشن امباكت.
 Aliases: *genshin*
 Usage: *${prefix}genshininfo* chara_name
 
 38. *${prefix}translate*
-Translate a text.
+ترجمة رسالة.
 Aliases: *trans*
 Usage: *${prefix}translate* text | code_lang
 
@@ -967,7 +967,7 @@ Aliases: -
 Usage: *${prefix}asmaulhusna* asmaulhusna_number
 
 41. *${prefix}randomquran*
-Random Al-Qur'an surah.
+سورة عشوائية من القران.
 Aliases: -
 Usage: *${prefix}randomquran*
 
@@ -977,12 +977,12 @@ Aliases: *corona*
 Usage: *${prefix}coronavirus* nation_name
 
 43. *${prefix}tomp3*
-Convert a video to audio only (MP3).
+يحول مقطع لصوت.
 Aliases: -
 Usage: Send a video with caption *${prefix}tomp3* or reply video with a caption *${prefix}tomp3*.
 
 44. *${prefix}ttp*
-Text to sticker.
+رساله لستيكر.
 Aliases: -
 UsageL *${prefix}ttp* text
 
@@ -992,17 +992,17 @@ Aliases: -
 Usage: Reply audio/voice with caption *${prefix}bass* dB_level.
 
 46. *${prefix}addsticker*
-Add sticker to database.
+اضافة ستيكر لبيانات البوت.
 Aliases: *addstiker*
 Usage: Reply sticker with caption *${prefix}addsticker* sticker_keyword.
 
 47. *${prefix}delsticker*
-Delete sticker from database.
+حذف ستيكر من البيانات.
 Aliases: *delstiker*
 Usage: *${prefix}delstiker* sticker_keyword
 
 48. *${prefix}stickerlist*
-List of added stickers.
+قائمة الستيكر.
 Aliases: *liststicker stikerlist liststiker*
 Usage: *${prefix}stickerlist*
 
@@ -1012,7 +1012,7 @@ Aliases: -
 Usage: Reply audio/voice with caption *${prefix}nightcore*.
 
 50. *${prefix}ocr*
-Scan text from image.
+ينسخ الكلام من الصوره.
 Aliases: -
 Usage: Send images with caption *${prefix}ocr* or reply to the images/stickers with a caption *${prefix}ocr*.
 
@@ -1022,35 +1022,35 @@ _Index of [3]_
 
 exports.menuSticker = () => {
     return `
-*── 「 STICKER 」 ──*
+*── 「 ستيكر 」 ──*
 
 1. *${prefix}sticker*
-Create stickers from images sent or replied.
+تسوي ستيكر.
 Aliases: *stiker*
 Usage: Send images with caption *${prefix}sticker* or reply to the images with a caption *${prefix}sticker*.
 
 2. *${prefix}stickergif*
-Create stickers from videos/GIFs.
+ستيكر متحرك
 Aliases: *stikergif*
 Usage: Send videos/GIFs with caption *${prefix}stickergif* or reply to the videos/GIFs with a caption *${prefix}stickergif*.
 
 3. *${prefix}ttg*
-Create text to GIF stickers.
+يحول كتابه لصوره.
 Aliases: -
 Usage: *${prefix}ttg* text
 
 4. *${prefix}stickertoimg*
-Convert sticker to image.
+يحول ستيكر لصورة.
 Aliases: *stikertoimg*
 Usage: Reply to the stickers with a caption *${prefix}stickertoimg*.
 
 5. *${prefix}emojisticker*
-Convert emoji to sticker.
+ايموجي لستيكر.
 Aliases: *emojistiker*
 Usage: *${prefix}emojisticker* emoji
 
 6. *${prefix}stickerwm*
-Create a sticker with metadata/WM.
+ستيكر مع حقوق ح/ق.
 Aliases: *stcwm*
 Usage: Send images with caption *${prefix}stickerwm* pack_name | author_name or reply to the image with a caption *${prefix}stickerwm* pack_name | author_name.
 
@@ -1060,7 +1060,7 @@ Aliases: *stcmeme*
 Usage: Send images with caption *${prefix}sticker* upper_text | bottom_text or reply to the images with a caption *${prefix}sticker* upper_text | bottom_text.
 
 8. *${prefix}takestick*
-Edit sticker metadata.
+تغير الحقوق.
 Aliases: -
 Usage: Reply to the stickers with a caption *${prefix}takestick* pack_name | author_name
 
@@ -1070,20 +1070,20 @@ _Index of [4]_
 
 exports.menuWeeaboo = () => {
     return `
-*── 「 WEEABOO 」 ──*
+*── 「 انمي 」 ──*
 
 1. *${prefix}neko*
-Send a neko girl photo.
+يرسل صور نيكو(قطه).
 Aliases: -
 Usage: *${prefix}neko*
 
 2. *${prefix}wallpaper*
-Send anime wallpapers.
+خلفيات.
 Aliases: *wp*
 Usage: *${prefix}wallpaper*
 
 3. *${prefix}kemono*
-Send kemonomimi girl photos.
+صور فتيات كيمونو.
 Aliases: -
 Usage: *${prefix}kemono*
 
@@ -1103,12 +1103,12 @@ Aliases: -
 Usage: Send screenshots with caption *${prefix}wait* or reply to the screenshots with a caption *${prefix}wait*.
 
 7. *${prefix}source*
-Look for sources from the doujin panel, illustrations, and images related to anime.
+يبحث عن مصدر صورة الانمي.
 Aliases: *sauce*
 Usage: Send images with caption *${prefix}source* or reply to the images with a caption *${prefix}source*.
 
 8. *${prefix}waifu*
-Send random waifu photos.
+صورة زوجة عشوائية .
 Aliases: -
 Usage: *${prefix}waifu*
 
@@ -1128,12 +1128,12 @@ Aliases: -
 Usage: *${prefix}anoboy*
 
 12. *${prefix}character*
-Find Character from anime.
+يبحث عن شخصية انمي.
 Alias: -
 Usage: *${prefix}character* name_character
 
 13. *${prefix}lolivid*
-Random loli video.
+مقطع لولي عشوائي .
 Aliases: -
 Usage: *${prefix}lolivid
 
@@ -1286,80 +1286,80 @@ _Index of [6]_
 
 exports.menuModeration = () => {
     return `
-*── 「 MODERATION 」 ──*
+*── 「 المشرفين 」 ──*
 
 1. *${prefix}add*
-Add users to group.
+اضافة شخص.
 Aliases: -
 Usage: *${prefix}add* 628xxxxxxxxxx
 
 2. *${prefix}kick*
-Remove members from the group.
+طرد عضو.
 Aliases: -
 Usage: *${prefix}kick* @member1
 
 3. *${prefix}promote*
-Promote member to become admin.
+اعطاء اشراف لشخص.
 Aliases: -
 Usage: *${prefix}promote* @member1
 
 4. *${prefix}demote*
-Demote member from admin.
+خفض مشرف.
 Aliases: -
 Usage: *${prefix}demote* @member1
 
 5. *${prefix}leave*
-Leave bot from group.
+لخروج البوت من القروب.
 Aliases: -
 Usage: *${prefix}leave*
 
 6. *${prefix}everyone*
-Mention all group members.
+منشن الكل.
 Aliases: -
 Usage: *${prefix}everyone*
 
 7. *${prefix}nsfw*
-Toogle NSFW mode.
+الهنتاي.
 Aliases: -
 Usage: *${prefix}nsfw* enable/disable
 
 8. *${prefix}groupicon*
-Change group icon.
+صورة القروب.
 Aliases: -
 Usage: Send images with caption *${prefix}groupicon* or reply to the images with a caption *${prefix}groupicon*.
 
 9. *${prefix}antilink*
-Toogle anti-group link feature.
+طرد اي شخص يرسل رابط.
 Aliases: -
 Usage: *${prefix}antilink* enable/disable
 
 10. *${prefix}welcome*
-Toogle welcome feature.
+الترحيب.
 Aliases: -
 Usage: *${prefix}welcome* enable/disable
 
 11. *${prefix}autosticker*
-Toogle auto-sticker feature. Every sended image will made into a sticker.
+اذا شخص ارسل صورة بيحولها ستيكر تلقائي.
 Aliases: *autostiker autostik*
 Usage: *${prefix}autostiker* enable/disable
 
 12. *${prefix}antinsfw*
-Toogle anti-NSFW link.
+طرد اي شخص يرسل روابط هنتاي.
 Aliases: -
 Usage: *${prefix}antinsfw* enable/disable
 
 13. *${prefix}mutegc*
-Set group to admin only who can send a message.
+قفل القروب.
 Aliases: -
 Usage: *${prefix}mutegc* enable/disable
 
 14. *${prefix}grouplink*
-Send a invite link of current group.
+يرسل رابط القروب.
 Aliases: -
 Usage: *${prefix}grouplink*
 
 15. *${prefix}revoke*
-Revoke invite link of current group.
+تغيير رابط القروب.
 Aliases: -
 Usage: *${prefix}revoke*
 
@@ -1452,80 +1452,80 @@ _Index of [8]_
 
 exports.menuOwner = () => {
     return `
-*── 「 OWNER 」 ──*
+*── 「 المطور 」 ──*
 
 1. *${prefix}bc*
-Make a broadcast.
+ارسال برودكاست.
 Aliases: -
 Usage: *${prefix}bc* text
 
 2. *${prefix}clearall*
-Deletes all chats on the bot account.
+احذف كل المحادثات.
 Aliases: -
 Usage: *${prefix}clearall*
 
 3. *${prefix}getses*
-Take a screenshot of the session from the bot account.
+خذ سكرين شوت من بينات البوت.
 Aliases: -
 Usage: *${prefix}getses*
 
 4. *${prefix}ban*
-Add/remove banned users.
+اضف/احذف او بلك مستخدم.
 Aliases: -
 Usage: *${prefix}ban* add/del @user/62812xxxxxxxx
 
 5. *${prefix}leaveall*
-Leave from all groups.
+اترك كل القروبات.
 Aliases: -
 Usage: *${prefix}leaveall*
 
 6. *${prefix}eval*
-Evaluate the JavaScript code.
+تقييم لغة البرمجة.
 Aliases: *ev*
 Usage: *${prefix}eval*
 
 7. *${prefix}shutdown*
-Shutdown bot.
+اطفاء.
 Aliases: -
 Usage: *${prefix}shutdown*
 
 8. *${prefix}premium*
-Add/remove premium users.
+اضف احذف مستخدم برايم.
 Aliases: -
 Usage: *${prefix}premium* add/del @user
 
 9. *${prefix}setstatus*
-Set about me.
+ضبط عني.
 Aliases: *setstatus setstat*
 Usage: *${prefix}status* text
 
 10. *${prefix}serial*
-Check user's serial.
+تحقق من المستخدم.
 Aliases: -
 Usage: *${prefix}serial* user_serial
 
 11. *${prefix}exif*
-Adjust your sticker WM.
+يعدل ستيكرك.
 Aliases: -
 Usage: *${prefix}exif* pack_name | author_name
 
 12. *${prefix}mute*
-Mute all users.
+ميوت كل المستخدمين.
 Aliases: -
 Usage: Use *${prefix}mute* to mute and use *${prefix}mute* once again to unmute.
 
 13. *${prefix}setname*
-Change bot's name. Maximum 25 characters.
+غير اسم البوت.الحد الاعلى 25 حرف.
 Aliases: -
 Usage: *${prefix}name* new_username
 
 14. *${prefix}block*
-Block user.
+بلك مستخدم.
 Aliases: *blok*
 Usage: *${prefix}block* @user/62812xxxxxxxx
 
 15. *${prefix}unblock*
-Unblock user.
+شيل البلوك.
 Aliases: *unblok*
 Usage: *${prefix}unblock* @user/62812xxxxxxxx
 
@@ -1535,15 +1535,15 @@ _Index of [9]_
 
 exports.menuLeveling = () => {
     return `
-*── 「 LEVELING 」 ──*
+*── 「 التلفيل 」 ──*
 
 1. *${prefix}level*
-Check your level.
+تاكد من مستواك.
 Aliases: -
 Usage: *${prefix}level*
 
 2. *${prefix}leaderboard*
-Check leaderboard.
+.شوف المتصدرين
 Aliaases: -
 Usage: *${prefix}leaderboard*
 
@@ -1553,18 +1553,18 @@ _Index of [10]_
 
 exports.rules = () => {
     return `
-*── 「 RULES 」 ──*
+*── 「 القوانين 」 ──*
 
-1. Do NOT spam bot. 
+1. لاتسوي سبام. 
 Penalty: *WARN/SOFT BLOCK*
 
-2. Do NOT call bot.
+2. لاتتصل على البوت.
 Penalty: *SOFT BLOCK*
 
-3. Do NOT exploit bots.
+3. لاتنشره.
 Penalty: *PERMANENT BLOCK*
 
-If you've understand these rules, please type *${prefix}menu* to get started.
+اذا مافهمت القوانين رجاء اكتب *${prefix}menu* عشان تفهم.
     `
 }
 
