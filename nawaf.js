@@ -15,4 +15,4 @@ moment.tz.setDefault('Saudi_Arabia/Qassim').locale('sau')
 const cron = require('node-cron')
 
 const { msgFilter, color, processTime, isUrl, createSerial } = require('./tools')
-const { daily, level, register, afk, reminder, premium, limit} = require('./function')
+const { daily, level, afk, reminder, premium, limit} = require('./function')
