@@ -1049,7 +1049,342 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error!', id)
                 }
             break
-
+            case prefix+'findsticker':
+            case prefix+'findstiker':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    misc.sticker(q)
+                        .then(async ({ result }) => {
+                            if (result.response !== 200) return await bocchi.reply(from, 'Not found!', id)
+                            for (let i = 0; i < result.data.length; i++) {
+                                await bocchi.sendStickerfromUrl(from, result.data[i], null, { author: authorWm, pack: packWm })
+                            }
+                            console.log('Success sending sticker!')
+                        })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, `Error!\n\n${err}`, id)
+                }
+            break
+            case prefix+'movie':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                misc.movie(q)
+                    .then(async ({ result }) => {
+                        let movies = `Result for: *${result.judul}*`
+                        for (let i = 0; i < result.data.length; i++) {
+                            movies +=  `\n\n➸ *Quality:* : ${result.data[i].resolusi}\n➸ *URL*: ${result.data[i].urlDownload}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
+                        }
+                        movies += '\n\nBy: VideFrelan'
+                        await bocchi.reply(from, movies, id)
+                        console.log('Success sending movie result!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'cekongkir': // By: VideFrelan
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                const kurir = q.substring(0, q.indexOf('|') - 1)
+                const askot = q.substring(q.indexOf('|') + 2, q.lastIndexOf('|') - 1)
+                const tukot = q.substring(q.lastIndexOf('|') + 2)
+                misc.ongkir(kurir, askot, tukot)
+                    .then(async ({ result }) => {
+                        let onkir = `*── 「 ${result.title} 」 ──*`
+                        for (let i = 0; i < result.data.length; i++) {
+                            onkir +=  `\n\n➸ *Layanan*: ${result.data[i].layanan}\n➸ *Estimasi*: ${result.data[i].etd}\n➸ *Tarif*: ${result.data[i].tarif}\n➸ *Info*: ${result.informasi}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
+                        }
+                        onkir += '\n\nBy: VideFrelan'
+                        await bocchi.reply(from, onkir, id)
+                        console.log('Success sending ongkir info!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'distance':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                const kotaAsal = q.substring(0, q.indexOf('|') - 1)
+                const kotaTujuan = q.substring(q.lastIndexOf('|') + 2)
+                misc.distance(kotaAsal, kotaTujuan)
+                    .then(async ({ result }) => {
+                        if (result.response !== 200) {
+                            await bocchi.reply(from, 'Error!', id)
+                        } else {
+                            await bocchi.reply(from, result.data, id)
+                            console.log('Success sending distance info!')
+                        }
+                    })
+            break
+            case prefix+'ytsearch':
+            case prefix+'yts':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    misc.ytSearch(q)
+                        .then(async ({ result }) => {
+                            for (let i = 0; i < 5; i++) {
+                                const { urlyt, image, title, channel, duration, views } = await result[i]
+                                await bocchi.sendFileFromUrl(from, image, `${title}.jpg`, ind.ytResult(urlyt, title, channel, duration, views), id)
+                                console.log('Success sending YouTube results!')
+                            }
+                        })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case prefix+'tts':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                const speech = q.substring(q.indexOf('|') + 2)
+                const ptt = tts(ar[0])
+                try {
+                    ptt.save(`${speech}.mp3`, speech, async () => {
+                        await bocchi.sendPtt(from, `${speech}.mp3`, id)
+                        fs.unlinkSync(`${speech}.mp3`)
+                    })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case prefix+'tomp3': // by: Piyobot
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (isMedia && isVideo || isQuotedVideo) {
+                    if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                    limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                    await bocchi.reply(from, ind.wait(), id)
+                    const encryptMedia = isQuotedVideo ? quotedMsg : message
+                    const _mimetype = isQuotedVideo ? quotedMsg.mimetype : mimetype
+                    console.log(color('[WAPI]', 'green'), 'Downloading and decrypting media...')
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const temp = './temp'
+                    const name = new Date() * 1
+                    const fileInputPath = path.join(temp, 'video', `${name}.${_mimetype.replace(/.+\//, '')}`)
+                    const fileOutputPath = path.join(temp, 'audio', `${name}.mp3`)
+                    fs.writeFile(fileInputPath, mediaData, (err) => {
+                        if (err) return console.error(err)
+                        ffmpeg(fileInputPath)
+                            .format('mp3')
+                            .on('start', (commandLine) => console.log(color('[FFmpeg]', 'green'), commandLine))
+                            .on('progress', (progress) => console.log(color('[FFmpeg]', 'green'), progress))
+                            .on('end', async () => {
+                                console.log(color('[FFmpeg]', 'green'), 'Processing finished!')
+                                await bocchi.sendFile(from, fileOutputPath, 'audio.mp3', '', id)
+                                console.log(color('[WAPI]', 'green'), 'Success sending mp3!')
+                                setTimeout(() => {
+                                    fs.unlinkSync(fileInputPath)
+                                    fs.unlinkSync(fileOutputPath)
+                                }, 30000)
+                            })
+                            .save(fileOutputPath)
+                    })
+                } else {
+                    await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
+            case prefix+'toptt':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (isMedia && isAudio || isQuotedAudio) {
+                    if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                    limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                    await bocchi.reply(from, ind.wait(), id)
+                    const encryptMedia = isQuotedAudio ? quotedMsg : message
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const name = new Date() * 1
+                    fs.writeFileSync(`./temp/audio/${name}.mp3`, mediaData)
+                    await bocchi.sendPtt(from, `./temp/audio/${name}.mp3`, id)
+                    fs.unlinkSync(`./temp/audio/${name}.mp3`)
+                } else {
+                    await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
+            case prefix+'playstore':
+            case prefix+'ps':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    misc.playstore(q)
+                        .then(async ({ result }) => {
+                            for (let i = 0; i < 5; i++) {
+                                const { app_id, icon, title, developer, description, price, free } = result[i]
+                                await bocchi.sendFileFromUrl(from, icon, `${title}.jpg`, ind.playstore(app_id, title, developer, description, price, free))
+                            }
+                            console.log('Success sending PlayStore result!')
+                        })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case prefix+'math':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (typeof mathjs.evaluate(q) !== 'number') {
+                    await bocchi.reply(from, ind.notNum(q), id)
+                } else {
+                    if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                    limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                    await bocchi.reply(from, `*── 「 MATH 」 ──*\n\n${q} = ${mathjs.evaluate(q)}`, id)
+                }
+            break
+            case prefix+'shopee':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                const namaBarang = q.substring(0, q.indexOf('|') - 1)
+                const jumlahBarang = q.substring(q.lastIndexOf('|') + 2)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    misc.shopee(namaBarang, jumlahBarang)
+                        .then(async ({ result }) => {
+                            for (let i = 0; i < result.items.length; i++) {
+                                const { nama, harga, terjual, shop_location, description, link_product, image_cover } = result.items[i]
+                                await bocchi.sendFileFromUrl(from, image_cover, `${nama}.jpg`, ind.shopee(nama, harga, terjual, shop_location, description, link_product))
+                            }
+                            console.log('Success sending Shopee data!')
+                        })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case prefix+'mutual':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (isGroupMsg) return await bocchi.reply(from, 'Command ini tidak bisa digunakan di dalam grup!', id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, 'Looking for a partner...', id)
+                await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
+                await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
+            break
+            case prefix+'next':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (isGroupMsg) return await bocchi.reply(from, 'Command ini tidak bisa digunakan di dalam grup!', id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, 'Looking for a partner...', id)
+                await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
+                await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
+            break
+            case prefix+'tafsir':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (args.length === 0) return bocchi.reply(from, `Untuk menampilkan ayat Al-Qur'an tertentu beserta tafsir dan terjemahannya\ngunakan ${prefix}tafsir surah ayat\n\nContoh: ${prefix}tafsir Al-Mulk 10`, id)
+                await bocchi.reply(from, ind.wait(), id)
+                const responSurah = await axios.get('https://raw.githubusercontent.com/VideFrelan/words/main/tafsir.txt')
+                const { data } = responSurah.data
+                const idx = data.findIndex((post) => {
+                    if ((post.name.transliteration.id.toLowerCase() === args[0].toLowerCase()) || (post.name.transliteration.en.toLowerCase() === args[0].toLowerCase())) return true
+                })
+                const nomerSurah = data[idx].number
+                if (!isNaN(nomerSurah)) {
+                    const responseh = await axios.get('https://api.quran.sutanlab.id/surah/'+ nomerSurah + '/'+ args[1])
+                    const { data } = responseh.data
+                    let pesan = ''
+                    pesan += 'Tafsir Q.S. ' + data.surah.name.transliteration.id + ':' + args[1] + '\n\n'
+                    pesan += data.text.arab + '\n\n'
+                    pesan += '_' + data.translation.id + '_\n\n' + data.tafsir.id.long
+                    await bocchi.reply(from, pesan, id)
+                }
+            break
+            case prefix+'listsurah':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                await bocchi.reply(from, ind.wait(), id)
+                misc.listSurah()
+                    .then(async ({ result }) => {
+                        let list = '*── 「 AL-QUR\'AN 」 ──*\n\n'
+                        for (let i = 0; i < result.list.length; i++) {
+                            list += `${result.list[i]}\n\n`
+                        }
+                        await bocchi.reply(from, list, id)
+                        console.log('Success sending Al-Qur\'an list!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'surah':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (args.length !== 1) return await bocchi.reply(from, ind.wrongFormat(), id)
+                await bocchi.reply(from, ind.wait(), id)
+                misc.getSurah(args[0])
+                    .then(async ({ result }) => {
+                        await bocchi.reply(from, `${result.surah}\n\n${result.quran}`, id)
+                        console.log('Success sending surah!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'hadis': // irham01
+            case prefix+'hadees':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (ar.length !== 1) return await bocchi.reply(from, ind.hadis(), id)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    if (ar[0] === 'darimi') {
+                        const hdar = await axios.get(`https://api.hadith.sutanlab.id/books/darimi/${args[1]}`)
+                        await bocchi.sendText(from, `${hdar.data.data.contents.arab}\n${hdar.data.data.contents.id}\n\n*H.R. Darimi*`, id)
+                    } else if (ar[0] === 'ahmad') {
+                        const hmad = await axios.get(`https://api.hadith.sutanlab.id/books/ahmad/${args[1]}`)
+                        await bocchi.sendText(from, `${hmad.data.data.contents.arab}\n${hmad.data.data.contents.id}\n\n*H.R. Ahmad*`, id)
+                    } else if (ar[0] === 'bukhari') {
+                        const hbukh = await axios.get(`https://api.hadith.sutanlab.id/books/bukhari/${args[1]}`)
+                        await bocchi.sendText(from, `${hbukh.data.data.contents.arab}\n${hbukh.data.data.contents.id}\n\n*H.R. Bukhori*`, id)
+                    } else if (ar[0] === 'muslim') {
+                        const hmus = await axios.get(`https://api.hadith.sutanlab.id/books/muslim/${args[1]}`)
+                        await bocchi.sendText(from, `${hmus.data.data.contents.arab}\n${hmus.data.data.contents.id}\n\n*H.R. Muslim*`, id)
+                    } else if (ar[0] === 'malik') {
+                        const hmal = await axios.get(`https://api.hadith.sutanlab.id/books/malik/${args[1]}`)
+                        await bocchi.sendText(from, `${hmal.data.data.contents.arab}\n${hmal.data.data.contents.id}\n\n*H.R. Malik*`, id)
+                    } else if (ar[0] === 'nasai') {
+                        const hnas = await axios.get(`https://api.hadith.sutanlab.id/books/nasai/${args[1]}`)
+                        await bocchi.sendText(from, `${hnas.data.data.contents.arab}\n${hnas.data.data.contents.id}\n\n*H.R. Nasa'i*`, id)
+                    } else if (ar[0] === 'tirmidzi') {
+                        const htir = await axios.get(`https://api.hadith.sutanlab.id/books/tirmidzi/${args[1]}`)
+                        await bocchi.sendText(from, `${htir.data.data.contents.arab}\n${htir.data.data.contents.id}\n\n*H.R. Tirmidzi*`, id)
+                    } else if (ar[0] === 'ibnumajah') {
+                        const hibn = await axios.get(`https://api.hadith.sutanlab.id/books/ibnu-majah/${args[1]}`)
+                        await bocchi.sendText(from, `${hibn.data.data.contents.arab}\n${hibn.data.data.contents.id}\n\n*H.R. Ibnu Majah*`, id)
+                    } else if (ar[0] === 'abudaud') {
+                        const habud = await axios.get(`https://api.hadith.sutanlab.id/books/abu-daud/${args[1]}`)
+                        await bocchi.sendText(from, `${habud.data.data.contents.arab}\n${habud.data.data.contents.id}\n\n*H.R. Abu Daud*`, id)
+                    } else {
+                        await bocchi.sendText(from, ind.hadis(), id)
+                    }
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
             } else {
               await bocchi.reply(from, ind.groupOnly(), id)
             }
