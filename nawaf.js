@@ -338,9 +338,9 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (isCmd && !isPremium && !isOwner) msgFilter.addFilter(from)
 
         switch (command) {
+            if (!isGroupMsg) {
             case prefix+'level':
                 if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
-                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 const userLevel = level.getLevelingLevel(sender.id, _level)
                 const userXp = level.getLevelingXp(sender.id, _level)
                 const ppLink = await bocchi.getProfilePicFromServer(sender.id)
@@ -498,3 +498,214 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break 
+            case prefix+'facebook':
+            case prefix+'fb':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(pushname), id)
+                if (!isUrl(url) && !url.includes('facebook.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.fb(url)
+                    .then(async ({ result }) => {
+                            await bocchi.sendFileFromUrl(from, result.VideoUrl, 'videofb.mp4', '', id)
+                            console.log(from, 'Success sending Facebook video!')
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+                case prefix+'ytmp3':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('youtu.be')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.ytdl(url)
+                    .then(async ({result}) => {
+                        if (Number(result.size.split(' MB')[0]) >= 30) {
+                            await bocchi.reply(from, ind.musiclimit(), id)
+                        } else {
+                            await bocchi.sendFileFromUrl(from, result.imgUrl, `${result.title}.jpg`, ind.ytFound(result), id)
+                            await bocchi.sendFileFromUrl(from, result.UrlMp3, `${result.title}.mp3`, '', id)
+                            console.log('Success sending YouTube video!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'ytmp4':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('youtu.be')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.ytdl(url)
+                    .then(async ({result}) => {
+                        if (Number(result.size.split(' MB')[0]) >= 30) {
+                            await bocchi.reply(from, ind.videoLimit(), id)
+                        } else {
+                            await bocchi.sendFileFromUrl(from, result.imgUrl, `${result.title}.jpg`, ind.ytFound(result), id)
+                            await bocchi.sendFileFromUrl(from, result.UrlVideo, `${result.title}.mp3`, '', id)
+                            console.log('Success sending YouTube video!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'tiktokpic':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                try {
+                    console.log(`Get profile pic for ${q}`)
+                    const tkt = await axios.get(`https://docs-jojo.herokuapp.com/api/tiktokpp?user=${q}`)
+                    if (tkt.data.error) return bocchi.reply(from, tkt.data.error, id)
+                    await bocchi.sendFileFromUrl(from, tkt.data.result, 'tiktokpic.jpg', 'Ini :D', id)
+                    console.log('Success sending TikTok profile pic!')
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case prefix+'tiktoknowm': // by: VideFrelan
+            case prefix+'tktnowm':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('tiktok.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.tikNoWm(url)
+                    .then(async ({ result }) => {
+                        await bocchi.sendFileFromUrl(from, result.thumb, 'TiktokNoWM.jpg', `➸ *Username*: ${result.username}\n➸ *Caption*: ${result.caption}\n➸ *Uploaded on*: ${result.uploaded_on}\n\nSedang dikirim, sabar ya...`, id)
+                        const responses = await fetch(result.link)
+                        const buffer = await responses.buffer()
+                        fs.writeFileSync(`./temp/${sender.id}_TikTokNoWm.mp4`, buffer)
+                        await bocchi.sendFile(from, `./temp/${sender.id}_TikTokNoWm.mp4`, `${sender.id}_TikTokNoWm.mp4`, '', id)
+                        console.log('Success sending TikTok video with no WM!')
+                        fs.unlinkSync(`./temp/${sender.id}_TikTokNoWm.mp4`)
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'tiktok':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('tiktok.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.tik(url)
+                    .then(async ({ result })=> {
+                        await bocchi.sendFileFromUrl(from, result.video, 'TikTok.mp4', '', id)
+                        console.log('Success sending TikTok video!')
+                    })
+                    .catch(async (err) => {
+                        console.log(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'twitter':
+            case prefix+'twt':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('twitter.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.tweet(url)
+                    .then(async (data) => {
+                        if (data.type === 'video') {
+                            const content = data.variants.filter((x) => x.content_type !== 'application/x-mpegURL').sort((a, b) => b.bitrate - a.bitrate)
+                            const result = await misc.shortener(content[0].url)
+                            console.log('Shortlink:', result)
+                            await bocchi.sendFileFromUrl(from, content[0].url, 'video.mp4', `Link HD: ${result}`, id)
+                                .then(() => console.log('Success sending Twitter media!'))
+                                .catch(async (err) => {
+                                    console.error(err)
+                                    await bocchi.reply(from, 'Error!', id)
+                                })
+                        } else if (data.type === 'photo') {
+                            for (let i = 0; i < data.variants.length; i++) {
+                                await bocchi.sendFileFromUrl(from, data.variants[i], data.variants[i].split('/media/')[1], '', id)
+                                .then(() => console.log('Success sending Twitter media!'))
+                                .catch(async (err) => {
+                                    console.error(err)
+                                    await bocchi.reply(from, 'Error!', id)
+                                })
+                            }
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'moddroid': // Chikaa Chantekkzz
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.modroid(q)
+                    .then(async ({ status, result }) => {
+                        if (status !== 200) {
+                            await bocchi.reply(from, 'Not found.', id)
+                        } else {
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD FOUND 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Size*: ${result[0].size}\n➸ *Publisher*: ${result[0].publisher}\n➸ *Version*: ${result[0].latest_version}\n➸ *Genre*: ${result[0].genre}\n\n*Download link*\n${result[0].download}`, id)
+                            console.log('Success sending APK mod!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'happymod': // chikaa chantexxzz
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                await bocchi.reply(from, ind.wait(), id)
+                downloader.happymod(q)
+                    .then(async ({ status, result }) => {
+                        if (status !== 200) {
+                            await bocchi.reply(from, 'Not found.', id)
+                        } else {
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD FOUND 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Size*: ${result[0].size}\n➸ *Root*: ${result[0].root}\n➸ *Version*: ${result[0].version}\n➸ *Price*: ${result[0].price}\n\n*Download link*\n${result[0].download}`, id)
+                            console.log('Success sending APK mod!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            case prefix+'linedl': // chikaa chantexxzz
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (isGroupMsg) return await bocchi.reply(from, ind.pcOnly(), id)
+                if (!isUrl(url) && !url.includes('store.line.me')) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                limit.addLimit(sender.id, _limit, isPremium, isOwner)
+                downloader.line(url)
+                    .then(async (res) => {
+                        await bocchi.sendFileFromUrl(from, res.thumb, 'line.png', `*「 LINE STICKER DOWNLOADER 」*\n\n➸ *Title*: ${res.title}\n➸ *Sticker type*: ${res.type}\n\n_Media sedang dikirim, mohon tunggu sebentar..._`, id)
+                        for (let i = 0; i < res.sticker.length; i++) {
+                            await bocchi.sendStickerfromUrl(from, `${res.sticker[i]}`, null, { author: authorWm, pack: packWm })
+                            console.log('Success sending Line sticker!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
+            } else {
+              await bocchi.reply(from, ind.groupOnly(), id)
+            }
