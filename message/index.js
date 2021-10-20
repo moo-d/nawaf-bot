@@ -359,7 +359,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
         switch (command) {
             // Level [BETA] by Slavyan
-            case prefix+'level':
+            case prefix+'لفل':
                 
                 if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
@@ -394,7 +394,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'leaderboard':
+            case prefix+'المتصدرين':
                  
                 if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
                 if (!isGroupMsg) return await bocchi.reply(from. ind.groupOnly(), id)
@@ -523,7 +523,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break 
-            case prefix+'facebook':
+            case prefix+'فيسبوك ':
             case prefix+'fb':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(pushname), id)
                 if (!isUrl(url) && !url.includes('facebook.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -540,7 +540,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-                case prefix+'ytmp3':
+                case prefix+'يوتيوب ':
                  
                 if (!isUrl(url) && !url.includes('youtu.be')) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -561,7 +561,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'ytmp4':
+            case prefix+'يوتيوب':
                  
                 if (!isUrl(url) && !url.includes('youtu.be')) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -582,7 +582,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'tiktokpic':
+            case prefix+'صورة تيك':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -600,7 +600,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'tiktoknowm': // by: VideFrelan
-            case prefix+'tktnowm':
+            case prefix+'تيك':
                  
                 if (!isUrl(url) && !url.includes('tiktok.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -621,7 +621,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'tiktok':
+            case prefix+'تيك':
                  
                 if (!isUrl(url) && !url.includes('tiktok.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -637,7 +637,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'twitter':
+            case prefix+'تويتر':
             case prefix+'twt':
                  
                 if (!isUrl(url) && !url.includes('twitter.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -753,7 +753,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'google': // chika-chantekkzz
+            case prefix+'قوقل': // chika-chantekkzz
             case prefix+'googlesearch':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -773,7 +773,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'say':
+            case prefix+'قل':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -808,7 +808,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'shortlink':
+            case prefix+'رابط صغير':
                  
                 if (!isUrl(url)) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -818,7 +818,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.reply(from, urlShort, id)
                 console.log('Success!')
             break
-            case prefix+'wikipedia':
+            case prefix+'ويكبيديا':
             case prefix+'wiki':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -892,7 +892,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     })
             break
             case prefix+'genshininfo': // chika chantexxzz
-            case prefix+'genshin':
+            case prefix+'قينشن':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -929,7 +929,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'instastory': // By: VideFrelan
-            case prefix+'igstory':
+            case prefix+'انستا':
                  
                 if (!q) return bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1074,7 +1074,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'findsticker':
-            case prefix+'findstiker':
+            case prefix+'البحث عن ستيكر':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1094,7 +1094,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, `Error!\n\n${err}`, id)
                 }
             break
-            case prefix+'movie':
+            case prefix+'فيلم':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1139,7 +1139,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'distance':
+            case prefix+'مسافة':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1156,7 +1156,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         }
                     })
             break
-            case prefix+'ytsearch':
+            case prefix+'بحث يوتيوب ':
             case prefix+'yts':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -1177,7 +1177,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error!', id)
                 }
             break
-            case prefix+'tts':
+            case prefix+'مترجم صوتي':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1194,7 +1194,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error!', id)
                 }
             break
-            case prefix+'tomp3': // by: Piyobot
+            case prefix+'صوتيه': // by: Piyobot
                  
                 if (isMedia && isVideo || isQuotedVideo) {
                     if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1266,7 +1266,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error!', id)
                 }
             break
-            case prefix+'math':
+            case prefix+'حل':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (typeof mathjs.evaluate(q) !== 'number') {
@@ -1511,7 +1511,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     })
             break
             case prefix+'addsticker': // by @hardianto02_
-            case prefix+'addstiker':
+            case prefix+'اضف ستيكر':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id) 
@@ -1529,7 +1529,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'delsticker':
+            case prefix+'حذف ستيكر':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
@@ -1542,7 +1542,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.stickerNotFound())
                 }
             break
-            case prefix+'stickerlist':
+            case prefix+'قائمة الستيكر':
             case prefix+'liststicker':
             case prefix+'stikerlist':
             case prefix+'liststiker':
@@ -1666,7 +1666,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'call':
+            case prefix+'سبام اتصال':
             case prefix+'spamcall':
                  
                 if (!q) return bocchi.reply(from, ind.wrongFormat(), id)
@@ -1705,7 +1705,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'translate':
+            case prefix+'ترجم':
             case prefix+'trans':
             case prefix+'tr':
                  
@@ -1794,7 +1794,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             break
 
             // Bot
-            case prefix+'menu':
+            case prefix+'اوامر':
             case prefix+'help':
                 const jumlahUser = _registered.length
                 const levelMenu = level.getLevelingLevel(sender.id, _level)
@@ -1828,7 +1828,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.sendText(from, ind.menu(jumlahUser, levelMenu, xpMenu, role, pushname, reqXpMenu, isPremium ? 'YES' : 'NO'))
                 }
             break
-            case prefix+'rules':
+            case prefix+'القوانين':
             case prefix+'rule':
                  
                 await bocchi.sendText(from, ind.rules())
@@ -1854,7 +1854,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                  
                 await bocchi.sendText(from, `*RAM*: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem / 1024 / 1024)} MB\n*CPU*: ${os.cpus()[0].model}`)
             break
-            case prefix+'listblock':
+            case prefix+'قائمة البلوك':
                  
                 let block = ind.listBlock(blockNumber)
                 for (let i of blockNumber) {
@@ -1862,7 +1862,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
                 await bocchi.sendTextWithMentions(from, block)
             break
-            case prefix+'ownerbot':
+            case prefix+'مطور البوت':
                  
                 await bocchi.sendContact(from, ownerNumber)
             break
@@ -1880,19 +1880,19 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 const uptime = process.uptime()
                 await bocchi.reply(from, `*── 「 BOT UPTIME 」 ──*\n\n❏${formater(uptime)}`, id)
             break
-            case prefix+'ping':
+            case prefix+'تست':
             case prefix+'p':
                  
                 await bocchi.sendText(from, `Pong!\nSpeed: ${processTime(t, moment())} secs`)
             break
-            case prefix+'delete':
+            case prefix+'حذف':
             case prefix+'del':
                  
                 if (!quotedMsg) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (!quotedMsgObj.fromMe) return await bocchi.reply(from, ind.wrongFormat(), id)
                 await bocchi.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
-            case prefix+'report':
+            case prefix+'انذار':
                  
                 if (!q) return await bocchi.reply(from, ind.emptyMess(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1916,7 +1916,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                  
                 await bocchi.sendLinkWithAutoPreview(from, 'https://github.com/SlavyanDesu/BocchiBot', ind.tos(ownerNumber))
             break
-            case prefix+'join':
+            case prefix+'انضم':
                  
                 if (!isUrl(url) && !url.includes('chat.whatsapp.com')) return await bocchi.reply(from, ind.wrongFormat(), id)
                 const checkInvite = await bocchi.inviteInfo(url)
@@ -2008,7 +2008,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             break
 
             // Weeb zone
-            case prefix+'neko':
+            case prefix+'نيكو':
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
@@ -2021,7 +2021,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'character': // by Anto
+            case prefix+'شخصية': // by Anto
             case prefix+'chara':
                  
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -2043,7 +2043,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error or chara not foud!', id)
                 }
             break
-            case prefix+'wallpaper':
+            case prefix+'خلفية ':
             case prefix+'wp':
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -2057,7 +2057,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id )
                     })
             break
-            case prefix+'kemono':
+            case prefix+'كيمونو':
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
@@ -2108,7 +2108,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'wait':
+            case prefix+'انتظر':
                  
                 if (isMedia && isImage || isQuotedImage) {
                     if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -2143,7 +2143,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'source':
+            case prefix+'المصدر':
             case prefix+'sauce':
                  
                 if (isMedia && isImage || isQuotedImage) {
@@ -2174,7 +2174,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'waifu':
+            case prefix+'زوجة':
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
@@ -2247,7 +2247,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'nimesticker': // by CHIKAA CHANTEKKXXZZ
+            case prefix+'ستيكر انمي': // by CHIKAA CHANTEKKXXZZ
             case prefix+'animesticker': 
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -2392,7 +2392,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     })
             break
             case prefix+'dogesticker': // by CHIKAA CHANTEKKXXZZ
-            case prefix+'doge':
+            case prefix+'كلب':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -2408,7 +2408,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         await bocchi.reply(from, 'Error!', id)
                     })
             break
-            case prefix+'profile':
+            case prefix+'بروفايل':
             case prefix+'me':
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -2864,7 +2864,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'kiss':
+            case prefix+'قبلة':
                  
                 try {
                     if (isMedia && isImage || isQuotedImage) {
@@ -2967,7 +2967,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.sendVideoAsGif(from, `https://api.vhtear.com/slidingtext?text=${q}&apikey=${config.vhtear}`, 'sliding.gif', '', id)
                 console.log('Success creating GIF!')
             break
-            case prefix+'text': // by: irham01
+            case prefix+'رسالة': // by: irham01
                  
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
@@ -3075,7 +3075,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'takestick': // By: VideFrelan, Chika Chantexx
+            case prefix+'سرقة': // By: VideFrelan, Chika Chantexx
             case prefix+'take':
                  
                 if (!q.includes('|')) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -3092,8 +3092,8 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'sticker':
-            case prefix+'stiker':
+            case prefix+'ستيكر':
+            case prefix+'ستكر':
                  
                 if (isMedia && isImage || isQuotedImage) {
                     await bocchi.reply(from, ind.wait(), id)
@@ -3124,7 +3124,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'stickergif':
-            case prefix+'stikergif':
+            case prefix+'ستيكر':
             case prefix+'sgif':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
@@ -3183,7 +3183,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'emojisticker':
-            case prefix+'emojistiker':
+            case prefix+'ايموجيز':
                  
                 if (args.length !== 1) return bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -3766,7 +3766,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.revokeGroupInviteLink(groupId)
                 await bocchi.sendTextWithMentions(from, `Group link revoked by @${sender.id.replace('@c.us', '')}`)
             break
-            case prefix+'grouplink':
+            case prefix+'رابط':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3776,7 +3776,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 const gcLink = await bocchi.getGroupInviteLink(groupId)
                 await bocchi.reply(from, gcLink, id)
             break
-            case prefix+'mutegc':
+            case prefix+'قفل':
                  
                 if (!isGroupMsg) return bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return bocchi.reply(from, ind.adminOnly(), id)
@@ -3795,7 +3795,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'add':
+            case prefix+'اضف':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3811,7 +3811,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, 'Error!', id)
                 }
             break
-            case prefix+'kick':
+            case prefix+'طرد':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3826,7 +3826,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.removeParticipant(groupId, i)
                 }
             break
-            case prefix+'promote':
+            case prefix+'رفع':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3839,7 +3839,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.promoteParticipant(groupId, mentionedJidList[0])
                 await bocchi.reply(from, ind.ok(), id)
             break
-            case prefix+'demote':
+            case prefix+'خفض':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3852,7 +3852,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.demoteParticipant(groupId, mentionedJidList[0])
                 await bocchi.reply(from, ind.ok(), id)
             break
-            case prefix+'leave':
+            case prefix+'اطلع':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3860,7 +3860,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 await bocchi.leaveGroup(groupId)
             break
             case prefix+'admins':
-            case prefix+'admin':
+            case prefix+'مشرفين':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -3889,7 +3889,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     daily.addLimit(sender.id, _daily)
                 }
             break
-            case prefix+'everyone':
+            case prefix+'منشن':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3919,7 +3919,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     daily.addLimit(sender.id, _daily)
                 }
             break
-            case prefix+'groupicon':
+            case prefix+'عرض':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3938,7 +3938,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'antilink':
+            case prefix+'مضاد روابط':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -3981,7 +3981,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-            case prefix+'welcome':
+            case prefix+'الترحيب':
                  
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
@@ -4050,7 +4050,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
             // Owner command
             case prefix+'block':
-            case prefix+'blok':
+            case prefix+'بلوك':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (mentionedJidList.length !== 0) {
                     for (let blok of mentionedJidList) {
@@ -4066,7 +4066,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
             break
             case prefix+'unblock':
-            case prefix+'unblok':
+            case prefix+'شيل بلوك':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (mentionedJidList.length !== 0) {
                     for (let blok of mentionedJidList) {
