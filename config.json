@@ -1,3 +1,10 @@
 {
-  "ownerBot": "966xxx"
+    "ownerBot": "966xxx"
+    "nao": "api-key",
+    "vhtear": "api-key",
+    "melodic": "administrator",
+    "tobz": "api-key", 
+    "lol": "api-key",
+    "authorStick": "Nawaf",
+    "packStick": "NawafBot"
 }
